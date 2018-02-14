@@ -26,6 +26,23 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    public boolean hasConflict(Alarms alarms)
+    {
+        if (alarmsDao().conflictSelector(alarms.getHour(),alarms.getMinutes()).size()>0) return true;
+
+        else return false;
+    }
+
+    public boolean checkedInsert (Alarms alarms)
+    {
+        if (hasConflict(alarms)) return false;
+
+        else {
+            alarmsDao().insertAll(alarms);
+            return true;
+        }
+    }
+
     public static void destroyInstance() {
         INSTANCE = null;
     }
