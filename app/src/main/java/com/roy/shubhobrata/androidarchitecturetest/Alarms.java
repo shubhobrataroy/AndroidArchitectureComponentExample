@@ -2,6 +2,7 @@ package com.roy.shubhobrata.androidarchitecturetest;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -133,6 +134,20 @@ public class Alarms {
     }
 
     public Alarms( int hour, int minutes, String profile, Boolean state, int volume, int timeout_id, int timeout_hour, int timeout_minutes, String timeout_profile, int timeout_volume) {
+        this.hour = hour;
+        this.minutes = minutes;
+        this.profile = profile;
+        this.state = state;
+        this.volume = volume;
+        this.timeout_id = timeout_id;
+        this.timeout_hour = timeout_hour;
+        this.timeout_minutes = timeout_minutes;
+        this.timeout_profile = timeout_profile;
+        this.timeout_volume = timeout_volume;
+    }
+    @Ignore
+    public Alarms(int id, int hour, int minutes, String profile, Boolean state, int volume, int timeout_id, int timeout_hour, int timeout_minutes, String timeout_profile, int timeout_volume) {
+        this.id = id;
         this.hour = hour;
         this.minutes = minutes;
         this.profile = profile;

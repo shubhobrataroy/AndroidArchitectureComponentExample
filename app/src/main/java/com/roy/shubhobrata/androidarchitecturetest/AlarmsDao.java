@@ -1,5 +1,6 @@
 package com.roy.shubhobrata.androidarchitecturetest;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -14,7 +15,7 @@ import java.util.List;
 @Dao
 public interface AlarmsDao {
     @Query("SELECT * FROM alarms")
-    List<Alarms> getAll();
+    LiveData <List<Alarms>> getAll();
 
     @Query("SELECT * FROM alarms WHERE id IN (:ids)")
     List<Alarms> loadAllByIds(int[] ids);
@@ -28,6 +29,9 @@ public interface AlarmsDao {
     @Delete
     void delete(Alarms alarms);
 
-//    @Query("UPDATE alarms SET hour = (:hour), minutes = (:minutes) , profile = (:profile) WHERE id = (:id)")
-//    void update(int id, int hour, int minutes, String profile, boolean state);
+    @Update
+    void update(Alarms alarms);
+
+    @Query("SELECT COUNT(*) FROM alarms")
+    int itemCount ();
 }
